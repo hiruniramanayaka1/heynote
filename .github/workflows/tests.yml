@@ -17,6 +17,13 @@ jobs:
       with:
         node-version: latest
         package-manager-cache: false
+    - name: Cache npm dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-
     - name: Install xvfb
       run: sudo apt-get install xvfb
     - name: Install dependencies
